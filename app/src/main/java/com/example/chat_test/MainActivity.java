@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     TextView recieved;
 
-    Socket s;
-    DataOutputStream ds;
 
 
     @Override
@@ -38,21 +36,22 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+
+
         new Thread(){
             public void run(){
                 try {
 
-                    s = new Socket("192.168.216.115", 6969);
-                    ds=new DataOutputStream(s.getOutputStream());
-
-                    DataInputStream di = new DataInputStream(s.getInputStream());
+                    //s = new Socket("192.168.216.115", 6969);
 
                     while(true) {
 
-                        String str= di.readUTF();
+                        String str= login.client.getDi().readUTF();
                         try {
                             if(!str.equals("")) {
+
                                 recieved.setText(str);
+
                             }
 
                         } catch (Exception e) {
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
 
-                } catch (IOException e){
+                } catch (Exception e){
 
                 }
             }
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         chat();
 
     }
-
 
     public void chat(){
 
@@ -89,8 +87,14 @@ public class MainActivity extends AppCompatActivity {
     public void send(){
 
         try {
+
             text = (EditText) findViewById(R.id.text);
-            ds.writeUTF(text.getText().toString());
+
+
+            if(!text.getText().equals("")){
+                login.client.getDs().writeUTF(text.getText().toString());
+            }
+
 
         } catch (IOException e){
 
