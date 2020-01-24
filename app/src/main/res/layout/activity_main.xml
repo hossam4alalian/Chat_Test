@@ -37,20 +37,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text" />
 
-    <TextView
-        android:id="@+id/recieved"
-        android:layout_width="403dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="501dp"
-        android:gravity="center"
-        android:hint="Recieved Message."
-        android:textSize="30sp"
+    <LinearLayout
+        android:id="@+id/chatBox"
+        android:layout_width="598dp"
+        android:layout_height="499dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/send" />
+        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

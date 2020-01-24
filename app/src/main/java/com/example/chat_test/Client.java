@@ -32,7 +32,7 @@ public class Client {
             StrictMode.setThreadPolicy(policy);
             try {
 
-                s = new Socket("192.168.216.115", 6969);
+                s = new Socket("192.168.216.56", 6969);
                 ds = new DataOutputStream(s.getOutputStream());
                 di = new DataInputStream(s.getInputStream());
 
