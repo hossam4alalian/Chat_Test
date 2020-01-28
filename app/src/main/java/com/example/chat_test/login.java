@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class login extends AppCompatActivity {
-    EditText name;
+    private EditText name;
     static Client client;
 
     @Override
@@ -45,6 +45,15 @@ public class login extends AppCompatActivity {
             }
         });
 
+    }
+
+    public EditText getName() {
+        return name;
+    }
+
+
+    public void setName(EditText name) {
+        this.name = name;
     }
 
 

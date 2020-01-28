@@ -2,10 +2,13 @@ package com.example.chat_test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,13 +21,19 @@ public class MainActivity extends AppCompatActivity {
     EditText text;
 
     TextView recieved;
+    TextView recievedMessage;
+
     LinearLayout lin;
     String str;
-    boolean reading=false;
+
+    login login = new login();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -40,15 +49,22 @@ public class MainActivity extends AppCompatActivity {
                         while(true) {
 
                             str= login.client.getDi().readUTF();
+
                             try {
                                 if(!str.equals("")) {
 
-                                    recieved.setText(str);
+                                    recieved=new TextView(MainActivity.this);
+
+                                    Log.wtf("a",str);
+                                    recievedMessage.setText(str);
+                                    recieved.setText(recievedMessage.getText().toString());
+                                    lin.addView(recieved);
+
 
                                 }
 
                             } catch (Exception e) {
-                                System.out.println("what");
+                                Log.wtf("a","whattttttt");
                             }
 
                         }
@@ -63,11 +79,14 @@ public class MainActivity extends AppCompatActivity {
 
         chat();
 
+
     }
 
     public void chat(){
         lin = (LinearLayout) findViewById(R.id.chatBox);
         lin.removeAllViews();
+
+        recievedMessage = (TextView) findViewById(R.id.recievedMessage);
 
         Button send=(Button) findViewById(R.id.send);
         send.setOnClickListener(new View.OnClickListener() {
@@ -83,22 +102,28 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-                    recieved=new TextView(MainActivity.this);
-
-                    lin.addView(recieved);
+                    //TextView sentMessage = new TextView(MainActivity.this);
+                    //sentMessage.setText(login.getName().getText()+" : "+text.getText());
+                    //lin.addView(sentMessage);
 
                     text = (EditText) findViewById(R.id.text);
 
-
                     if(!text.getText().equals("")){
+
+
                         login.client.getDs().writeUTF(text.getText().toString());
                     }
-                    reading=true;
+
 
                 } catch (IOException e){
 
                 }
 
     }
+
+
+   
+
+
 
 }

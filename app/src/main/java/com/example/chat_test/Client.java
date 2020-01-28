@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class Client {
-    EditText name;
+
 
     private Socket s;
     private DataOutputStream ds;
@@ -32,7 +32,7 @@ public class Client {
             StrictMode.setThreadPolicy(policy);
             try {
 
-                s = new Socket("192.168.216.56", 6969);
+                s = new Socket("192.168.216.139", 6969);
                 ds = new DataOutputStream(s.getOutputStream());
                 di = new DataInputStream(s.getInputStream());
 
