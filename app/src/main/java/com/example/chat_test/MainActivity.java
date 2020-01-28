@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
-
         new Thread(){
             public void run(){
                 try {
@@ -102,14 +100,17 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-                    //TextView sentMessage = new TextView(MainActivity.this);
-                    //sentMessage.setText(login.getName().getText()+" : "+text.getText());
-                    //lin.addView(sentMessage);
+                    Bundle extras = getIntent().getExtras();
+
+                    String theName = extras.getString("name");
 
                     text = (EditText) findViewById(R.id.text);
 
                     if(!text.getText().equals("")){
+                        TextView sentMessage = new TextView(MainActivity.this);
 
+                        sentMessage.setText(theName+" : "+text.getText().toString());
+                        lin.addView(sentMessage);
 
                         login.client.getDs().writeUTF(text.getText().toString());
                     }
